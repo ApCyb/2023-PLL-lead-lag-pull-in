@@ -2,7 +2,7 @@ function plot_bifurcation_diagram_2parameters(k, a_array)
 %bifurcation_diagram_function plots bifurcation diagram for slope k > 1/pi
 % and value a = tau_2/(tau_1 + tau_2) < 1 or array of values a_array
 arguments
-        k {mustBeGreaterThan1_by_Pi(k)} % Custom validation function
+        k {mustBeGreaterThan1_by_Pi(k)}
         a_array {mustBeGreaterThanOrEqual(a_array, 0), mustBeLessThan(a_array, 1)}
 end
 
@@ -28,13 +28,15 @@ for i = 1:length(a_array)
         tau_2 = a / (1 - a);
         K_vco = x * (1 - a);
 
-        % Compute normalized pull-in frequency
+        % Compute pull-in frequency
         y_p(j) = omega_p_function(k, K_vco, tau_1, tau_2);
     end
 
 
-    % Plot normalized pull-in frequency as a function of x
+    % Normalize pull-in frequency
     y_p_normalized = y_p ./ ((1 - a) * x_array);
+
+    % Plot normalized pull-in frequency as a function of x
     semilogx(x_array, y_p_normalized, 'black', 'LineWidth', 1);
     grid on;
     hold on;

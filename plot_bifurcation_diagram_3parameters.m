@@ -2,7 +2,7 @@ function plot_bifurcation_diagram_3parameters(k, tau_1, tau_2)
 %omega_p_normalized_function plots value of normalized pull-in frequency
 % for slope k > 1/pi and values tau_1 > 0, tau_2 >= 0
 arguments
-        k {mustBeGreaterThan1_by_Pi(k)} % Custom validation function
+        k {mustBeGreaterThan1_by_Pi(k)}
         tau_1 {mustBePositive}
         tau_2 {mustBeNonnegative}
 end
@@ -18,12 +18,15 @@ for i = 1:n
     omega_p(i) = omega_p_function(k, K_vco, tau_1, tau_2);
 end
 
-% Plot normalized pull-in frequency (omega_p / K_vco) on a semilogarithmic scale
+% Normalize pull-in frequency
 omega_p_normalized = omega_p ./ K_vcos;
+
+% Plot normalized pull-in frequency (omega_p / K_vco) on a semilogarithmic scale
 semilogx(K_vcos, omega_p_normalized, 'black', 'LineWidth', 1);
  
 grid on;
 hold on;
+
  % Compute and plot the critical point x_ht
  % Critical points K_vco_ht and K_vco_pt
 K_vco_ht = K_vco_ht_function(k, tau_1, tau_2);
@@ -32,11 +35,9 @@ if tau_2 ~= 0
     K_vco_pt = K_vco_pt_function(k, tau_1, tau_2);
 end
 
-    semilogx(K_vco_ht, 1, 'x', 'LineWidth', 2, 'Color', 'black');
-    omega_p_switching_normalized = omega_p_function(k, K_vco_pt, tau_1, tau_2)/K_vco_pt;
-    semilogx(K_vco_pt, omega_p_switching_normalized, 'x', 'LineWidth', 2, 'Color', 'red');
-
-
+semilogx(K_vco_ht, 1, 'x', 'LineWidth', 2, 'Color', 'black');
+omega_p_switching_normalized = omega_p_function(k, K_vco_pt, tau_1, tau_2)/K_vco_pt;
+semilogx(K_vco_pt, omega_p_switching_normalized, 'x', 'LineWidth', 2, 'Color', 'red');
 
 % Formatting the plot
 set(gca, 'FontSize', 15);
