@@ -1,0 +1,1 @@
+This repo allows to construct bifurcation diagrams for the pull-in range calculation for a second-order PLL with lead-lag loop filter and piecewise-linear phase detector characteristic. Full analysis of this system can be found at https://ieeexplore.ieee.org/document/11015452. See also video with construction of bifurcation diagrams: https://www.youtube.com/watch?v=5l7ehIQUOy4.
